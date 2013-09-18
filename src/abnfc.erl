@@ -46,7 +46,7 @@ file(File, Opts) when is_list(Opts) ->
                         false -> ok
                     end,
                     {ok, Code} = abnfc_gen:generate(AST1, GenOpts),
-                    {ok, GenFile} = write_file(Code, GenOpts),
+                    {ok, GenFile} = write_file(Code, GenOpts ++ Opts),
                     compile_file(GenFile, COpts, Opts);
                 Error ->
                     Error

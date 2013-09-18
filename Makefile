@@ -1,5 +1,5 @@
 
-REBAR?=./rebar
+REBAR=$(shell which rebar)
 
 .PHONY: all clean deps compile xref doc test eunit eqc proper triq \
 	compile-for-eunit compile-for-eqc compile-for-proper compile-for-triq
