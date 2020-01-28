@@ -33,26 +33,22 @@ file(File) ->
 %% @end
 %%--------------------------------------------------------------------
 file(File, Opts) when is_list(Opts) ->
-    case read_file(File) of
-        {ok, Name, Text} ->
-            POpts = [],
-            GenOpts = gen_opts(Name, Opts),
-            COpts = compiler_opts(Opts),
-            case parse(Text, POpts) of
-                {ok, AST, _Rest} ->
-                    AST1 = abnfc_ast:ast_to_int_form(AST),
-                    case proplists:get_bool(verbose,Opts) of
-                        true -> io:format("~p~n",[AST1]);
-                        false -> ok
-                    end,
-                    {ok, Code} = abnfc_gen:generate(AST1, GenOpts),
-                    {ok, GenFile} = write_file(Code, GenOpts ++ Opts),
-                    compile_file(GenFile, COpts, Opts);
-                Error ->
-                    Error
-            end;
-        Error ->
-            Error
+    {ok, Name, Text} = read_file(File),
+    POpts = [],
+    GenOpts = gen_opts(Name, Opts),
+    COpts = compiler_opts(Opts),
+    case parse(Text, POpts) of
+        {ok, AST, _Rest} ->
+            AST1 = abnfc_ast:ast_to_int_form(AST),
+            case proplists:get_bool(verbose,Opts) of
+                true -> io:format("~p~n",[AST1]);
+                false -> ok
+            end,
+            {ok, Code} = abnfc_gen:generate(AST1, GenOpts),
+            {ok, GenFile} = write_file(Code, GenOpts ++ Opts),
+            compile_file(GenFile, COpts, Opts);
+        fail ->
+            io:format("abnfc: failed~n",[])
     end.
 
 %%--------------------------------------------------------------------
@@ -76,10 +72,10 @@ parse(Bin, Opts) when is_binary(Bin) ->
 parse(String, Opts) when is_list(String) ->
     Parser = proplists:get_value(parser, parse_opts(Opts)),
     case catch Parser:rulelist_dec(String) of
-        {ok, _Rulelist, []} =Result ->
+        {ok, _Rulelist, []} = Result ->
             Result;
-        _Error ->
-            io:format("abnfc: failed~n",[])
+        Error ->
+            Error
     end.
 
 %%--------------------------------------------------------------------
