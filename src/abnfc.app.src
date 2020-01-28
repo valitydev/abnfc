@@ -12,6 +12,6 @@
   {applications,[kernel,stdlib]},
   {registered,[]},
   {env,[]},
-  {licenses, []},
+  {licenses, ["Unknown"]},
   {links, [{"Github", "https://github.com/rbkmoney/abnfc.git"}]}
  ]}.
