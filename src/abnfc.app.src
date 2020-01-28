@@ -11,5 +11,7 @@
             , rfc4234ext_core]},
   {applications,[kernel,stdlib]},
   {registered,[]},
-  {env,[]}
+  {env,[]},
+  {licenses, []},
+  {links, [{"Github", "https://github.com/rbkmoney/abnfc.git"}]}
  ]}.
