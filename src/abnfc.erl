@@ -71,6 +71,7 @@ parse(Bin, Opts) when is_binary(Bin) ->
 
 parse(String, Opts) when is_list(String) ->
     Parser = proplists:get_value(parser, parse_opts(Opts)),
+    maybe_write("abnfc: parsing with ~p~n", [Parser], Opts),
     case catch Parser:rulelist_dec(String) of
         {ok, _Rulelist, []} = Result ->
             Result;
