@@ -18,6 +18,9 @@ compile:
 xref:
 	$(REBAR) xref
 
+dialyze:
+	$(REBAR) dialyzer
+
 doc:
 	@rm -rf README.md doc/edoc-info doc/*.md
 	$(REBAR) -C rebar.config.doc get-deps compile
