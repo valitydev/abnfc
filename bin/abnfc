@@ -16,7 +16,7 @@ main(Args) ->
 
 do_it(File, Opts) ->
     ScriptDir = filename:dirname(escript:script_name()),
-    EBIN = filename:join([ScriptDir,"../ebin"]),
+    EBIN = filename:join([ScriptDir,"../_build/default/lib/abnfc/ebin"]),
     code:add_patha(EBIN),
     R = abnfc:file(File, Opts),
     io:format("~p~n",[R]).
