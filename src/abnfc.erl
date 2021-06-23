@@ -164,7 +164,7 @@ write_file(Code, Opts) ->
 
     maybe_write("abnfc: writing to ~p~n",[Name],Opts),
     ok = file:write_file(Name, Code),
-    erl_tidy:file(Name,[{paper, 95},{backups,false}]),
+    abnfc_erl_tidy:file(Name,[{paper, 95},{backups,false}]),
     {ok,Name}.
 
 compile_file(File, COpts, MyOpts) ->
