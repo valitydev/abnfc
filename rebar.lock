@@ -1,4 +1,1 @@
-[{<<"erl_tidy">>,
-  {git,"https://github.com/richcarl/erl_tidy",
-       {ref,"d9c7f13552700a5f18e6a315eca1bd7628cd4d5f"}},
-  0}].
+[].
